@@ -9,7 +9,6 @@ class FilmRepository {
 
     suspend fun getFilms() : List<MediaModel> {
         val files = api.getFilms()
-        Log.i("DAM", "$files")
         return files
     }
 }

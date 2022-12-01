@@ -17,7 +17,6 @@ class FilmViewModel: ViewModel() {
 
     private fun getList() {
         filmList = _filmList
-        Log.i("DAM","${filmList.value?.size ?: "Error"} ${filmList.value}")
     }
 
     fun getUserFilms() {
