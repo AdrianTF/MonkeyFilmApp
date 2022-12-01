@@ -1,7 +1,7 @@
 package tourino.adrian.monkeyfilmapp.home.domain
 
 import tourino.adrian.monkeyfilmapp.home.data.FilmRepository
-import tourino.adrian.monkeyfilmapp.model.MediaModel
+import tourino.adrian.monkeyfilmapp.home.ui.MediaModel
 
 class FilmUseCase {
     private val repository = FilmRepository()

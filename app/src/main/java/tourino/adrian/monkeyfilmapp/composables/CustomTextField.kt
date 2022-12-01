@@ -33,7 +33,7 @@ fun CustomTextField(
         TextField(
             value = textValue,
             onValueChange = {
-                if (it.length <= length) { //2
+                if (it.length <= length) {
                     textValue = it
                     onValueChange(it)
                 }
@@ -44,7 +44,7 @@ fun CustomTextField(
             )
         )
         Text(
-            text = "${textValue.length}/$length",//3
+            text = "${textValue.length}/$length",
             color = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.medium),
             style = MaterialTheme.typography.caption,
             modifier = Modifier

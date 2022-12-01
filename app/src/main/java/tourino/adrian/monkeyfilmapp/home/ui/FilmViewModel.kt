@@ -1,13 +1,11 @@
 package tourino.adrian.monkeyfilmapp.home.ui
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import tourino.adrian.monkeyfilmapp.home.domain.FilmUseCase
-import tourino.adrian.monkeyfilmapp.model.MediaModel
 
 class FilmViewModel: ViewModel() {
     private val filmUseCase = FilmUseCase()

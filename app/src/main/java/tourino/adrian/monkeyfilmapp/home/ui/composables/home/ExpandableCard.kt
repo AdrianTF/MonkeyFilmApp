@@ -1,4 +1,5 @@
-package tourino.adrian.monkeyfilmapp.composables
+package tourino.adrian.monkeyfilmapp.home.ui.composables.home
+
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearOutSlowInEasing
@@ -10,8 +11,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,21 +29,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import tourino.adrian.monkeyfilmapp.R
-import tourino.adrian.monkeyfilmapp.model.MediaModel
+import tourino.adrian.monkeyfilmapp.home.ui.MediaModel
+import tourino.adrian.monkeyfilmapp.model.Routes
 import tourino.adrian.monkeyfilmapp.ui.theme.GoldenStar
-
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun FavoriteExpandableCard(selectedFilm: MediaModel, navController: NavHostController) {
+fun ExpandableCard(selectedFilm: MediaModel, navController: NavHostController) {
+    //Expanded variables
     var expand by remember { mutableStateOf(false) } // Expand State
     val rotationState by animateFloatAsState(if (expand) 180f else 0f) // Rotation State
     var stroke by remember { mutableStateOf(1) } // Stroke State
 
-    val icons =
-        if (expand) painterResource(id = R.drawable.design_ic_remove)
-        else painterResource(id = R.drawable.design_ic_add)
-    var deleted by remember { mutableStateOf(false) }
+    //Movie variables
+    var favClicked by remember { mutableStateOf(selectedFilm.favorite) }
     val imageCartel = when (selectedFilm.catel) {
         1 -> R.drawable.c1
         2 -> R.drawable.c2
@@ -54,6 +56,14 @@ fun FavoriteExpandableCard(selectedFilm: MediaModel, navController: NavHostContr
         10 -> R.drawable.c10
         else -> R.drawable.moviedefault
     }
+
+    //Icon animation variables
+    val icons =
+        if (expand) painterResource(id = R.drawable.design_ic_remove)
+        else painterResource(id = R.drawable.design_ic_add)
+    val favoriteIcon =
+        if (favClicked) Icons.Filled.Favorite
+        else Icons.Outlined.FavoriteBorder
 
     Card(
         modifier = Modifier
@@ -82,7 +92,9 @@ fun FavoriteExpandableCard(selectedFilm: MediaModel, navController: NavHostContr
                 horizontalArrangement = Arrangement.SpaceBetween // Control the header Alignment over here.
             ) {
                 Image(
-                    painter = painterResource(imageCartel), contentDescription = "",
+                    painter = painterResource(
+                        id = imageCartel
+                    ), contentDescription = "",
                     modifier = Modifier
                         .size(80.dp)
                         .padding(5.dp)
@@ -95,7 +107,7 @@ fun FavoriteExpandableCard(selectedFilm: MediaModel, navController: NavHostContr
                         .padding(start = 8.dp)
                 ) {
                     Text(
-                        text = selectedFilm.title, // Header
+                        text = selectedFilm.title,
                         fontSize = 20.sp,
                         textAlign = TextAlign.Start,
                         fontWeight = FontWeight.Normal,
@@ -112,7 +124,7 @@ fun FavoriteExpandableCard(selectedFilm: MediaModel, navController: NavHostContr
                             modifier = Modifier.size(20.dp)
                         )
                         Text(
-                            text = "${selectedFilm.score}", // Header
+                            text = "${selectedFilm.score}",
                             fontSize = 16.sp,
                             textAlign = TextAlign.Start,
                             fontWeight = FontWeight.Normal,
@@ -123,15 +135,14 @@ fun FavoriteExpandableCard(selectedFilm: MediaModel, navController: NavHostContr
                 IconButton(
                     modifier = Modifier.weight(.1f),
                     onClick = {
-                        deleted = !deleted
+                        favClicked = !favClicked
                         selectedFilm.like()
-                    },
-                    enabled = !deleted
+                    }
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Delete,
-                        tint = if (!deleted) Color.Red else Color.Gray, // Icon Color
-                        contentDescription = "Delete icon",
+                        imageVector = favoriteIcon,
+                        tint = Color.Red,
+                        contentDescription = "fav icon",
                         modifier = Modifier.size(32.dp)
                     )
                 }
@@ -146,7 +157,7 @@ fun FavoriteExpandableCard(selectedFilm: MediaModel, navController: NavHostContr
                 ) {
                     Icon(
                         painter = icons,
-                        tint = Color.Green, // Icon Color
+                        tint = Color.Green,
                         contentDescription = "More/less icon",
                         modifier = Modifier.size(32.dp)
                     )
@@ -177,12 +188,29 @@ fun FavoriteExpandableCard(selectedFilm: MediaModel, navController: NavHostContr
                             fontWeight = FontWeight.Normal,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
+                                .padding(start = 16.dp, end = 6.dp, bottom = 16.dp)
+                                .weight(.8f)
                         )
+                        IconButton(
+                            modifier = Modifier.weight(.1f),
+                            onClick = {
+                                navController.navigate(
+                                    Routes.DetailsActivity.createRoute(
+                                        selectedFilm
+                                    )
+                                )
+                            },
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Search,
+                                tint = Color.Black,
+                                contentDescription = "details icon",
+                                modifier = Modifier.size(32.dp)
+                            )
+                        }
                     }
                 }
             }
         }
     }
-
 }

@@ -1,8 +1,7 @@
 package tourino.adrian.monkeyfilmapp.home.data
 
-import android.util.Log
 import tourino.adrian.monkeyfilmapp.home.data.network.FilmService
-import tourino.adrian.monkeyfilmapp.model.MediaModel
+import tourino.adrian.monkeyfilmapp.home.ui.MediaModel
 
 class FilmRepository {
     private val api = FilmService()

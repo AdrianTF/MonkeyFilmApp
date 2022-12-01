@@ -9,7 +9,3 @@ object RetrofitHelper {
             .addConverterFactory(GsonConverterFactory.create()).build()
     }
 }
-
-//TODO Revisar el tema del matcher
-//TODO preguntar por que se me ralentiza tanto la app
-//TODO preguntar por que se me esconden las cards debajo del scaffold

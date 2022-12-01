@@ -3,7 +3,7 @@ package tourino.adrian.monkeyfilmapp.home.data.network
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import tourino.adrian.monkeyfilmapp.core.network.RetrofitHelper
-import tourino.adrian.monkeyfilmapp.model.MediaModel
+import tourino.adrian.monkeyfilmapp.home.ui.MediaModel
 
 class FilmService {
     private val retrofit = RetrofitHelper.getRetrofit()

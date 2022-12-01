@@ -1,5 +1,7 @@
 package tourino.adrian.monkeyfilmapp.model
 
+import tourino.adrian.monkeyfilmapp.home.ui.MediaModel
+
 sealed class Routes(val route: String) {
     object LoginActivity : Routes("loginActivity")
     object RegisterActivity : Routes("registerActivity")

@@ -1,4 +1,4 @@
-package tourino.adrian.monkeyfilmapp.model
+package tourino.adrian.monkeyfilmapp.home.ui
 
 data class MediaModel(
     var id: Int,
